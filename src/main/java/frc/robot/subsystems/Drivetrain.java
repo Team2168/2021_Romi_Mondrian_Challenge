@@ -34,12 +34,22 @@ public class Drivetrain extends SubsystemBase {
   // Set up the BuiltInAccelerometer
   private final BuiltInAccelerometer m_accelerometer = new BuiltInAccelerometer();
 
+  private static Drivetrain instance = null;
+
   /** Creates a new Drivetrain. */
-  public Drivetrain() {
+  private Drivetrain() {
     // Use inches as unit for encoder distances
     m_leftEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
     m_rightEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
     resetEncoders();
+  }
+
+  public static Drivetrain getInstance() {
+    if (instance == null) {
+      instance = new Drivetrain();
+    }
+
+    return instance;
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
