@@ -18,13 +18,12 @@ public class TurnDegrees extends CommandBase {
    *
    * @param speed The speed which the robot will drive. Negative is in reverse.
    * @param degrees Degrees to turn. Leverages encoders to compare distance.
-   * @param drive The drive subsystem on which this command will run
    */
-  public TurnDegrees(double speed, double degrees, Drivetrain drive) {
+  public TurnDegrees(double speed, double degrees) {
     m_degrees = degrees;
     m_speed = speed;
-    m_drive = drive;
-    addRequirements(drive);
+    m_drive = Drivetrain.getInstance();
+    addRequirements(m_drive);
   }
 
   // Called when the command is initially scheduled.
