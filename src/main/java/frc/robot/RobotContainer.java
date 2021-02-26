@@ -10,6 +10,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutonomousDistance;
 import frc.robot.commands.AutonomousTime;
+import frc.robot.commands.DriveDistance;
+import frc.robot.commands.DriveStraight;
+import frc.robot.commands.MondrianHardCoded;
+import frc.robot.commands.TurnDegreesGyro;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OnBoardIO;
 import frc.robot.subsystems.OnBoardIO.ChannelMode;
@@ -18,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -27,7 +32,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final Drivetrain m_drivetrain;
+  private final Drivetrain m_drivetrain = Drivetrain.getInstance();
   private final OnBoardIO m_onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
 
   // Assumes a gamepad plugged into channnel 0
@@ -49,8 +54,6 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    m_drivetrain = Drivetrain.getInstance();
-
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -66,15 +69,27 @@ public class RobotContainer {
     // is scheduled over it.
     m_drivetrain.setDefaultCommand(getArcadeDriveCommand());
 
+    JoystickButton testDistance = new JoystickButton(m_controller, 1);
+    JoystickButton ButtonX = new JoystickButton(m_controller, 2);
+    JoystickButton testClockwiseRotation = new JoystickButton(m_controller, 3);
+    JoystickButton testCounterClockwiseRotation = new JoystickButton(m_controller, 4);
+
+  testDistance.whenPressed(new DriveDistance(0.6, 10, m_drivetrain));
+  ButtonX.whenPressed(new MondrianHardCoded(m_drivetrain));
+  testClockwiseRotation.whenPressed(new TurnDegreesGyro(0.5, 90, m_drivetrain));
+  testCounterClockwiseRotation.whenPressed(new TurnDegreesGyro(0.5, -90, m_drivetrain));
+
     // Example of how to use the onboard IO
     Button onboardButtonA = new Button(m_onboardIO::getButtonAPressed);
-    onboardButtonA
-        .whenActive(new PrintCommand("Button A Pressed"))
-        .whenInactive(new PrintCommand("Button A Released"));
+    // onboardButtonA
+    //     .whenActive(new PrintCommand("Button A Pressed"))
+    //     .whenInactive(new PrintCommand("Button A Released"));
+
+    onboardButtonA.whenPressed(new MondrianHardCoded(m_drivetrain));
 
     // Setup SmartDashboard options
-    m_chooser.setDefaultOption("Auto Routine Distance", new AutonomousDistance());
-    m_chooser.addOption("Auto Routine Time", new AutonomousTime());
+    m_chooser.setDefaultOption("Auto Routine Distance", new AutonomousDistance(m_drivetrain));
+    m_chooser.addOption("Auto Routine Time", new AutonomousTime(m_drivetrain));
     SmartDashboard.putData(m_chooser);
   }
 
@@ -93,6 +108,7 @@ public class RobotContainer {
    * @return the command to run in teleop
    */
   public Command getArcadeDriveCommand() {
-    return new ArcadeDrive(() -> -m_controller.getRawAxis(1), () -> m_controller.getRawAxis(2));
+    return new ArcadeDrive(
+        m_drivetrain, () -> -(m_controller.getRawAxis(1) * 0.65), () -> (m_controller.getRawAxis(0) * 0.65));
   }
 }

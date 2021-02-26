@@ -22,12 +22,13 @@ public class TurnTime extends CommandBase {
    *
    * @param speed The speed which the robot will turn. Negative is in reverse.
    * @param time How much time to turn in seconds
+   * @param drive The drive subsystem on which this command will run
    */
-  public TurnTime(double speed, double time) {
+  public TurnTime(double speed, double time, Drivetrain drive) {
     m_rotationalSpeed = speed;
     m_duration = time * 1000;
-    m_drive = Drivetrain.getInstance();
-    addRequirements(m_drive);
+    m_drive = drive;
+    addRequirements(drive);
   }
 
   // Called when the command is initially scheduled.

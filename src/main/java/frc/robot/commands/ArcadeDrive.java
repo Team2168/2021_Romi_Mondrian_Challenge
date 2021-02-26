@@ -17,14 +17,18 @@ public class ArcadeDrive extends CommandBase {
    * Creates a new ArcadeDrive. This command will drive your robot according to the speed supplier
    * lambdas. This command does not terminate.
    *
+   * @param drivetrain The drivetrain subsystem on which this command will run
    * @param xaxisSpeedSupplier Lambda supplier of forward/backward speed
    * @param zaxisRotateSuppplier Lambda supplier of rotational speed
    */
-  public ArcadeDrive(Supplier<Double> xaxisSpeedSupplier, Supplier<Double> zaxisRotateSuppplier) {
-    m_drivetrain = Drivetrain.getInstance();
+  public ArcadeDrive(
+      Drivetrain drivetrain,
+      Supplier<Double> xaxisSpeedSupplier,
+      Supplier<Double> zaxisRotateSuppplier) {
+    m_drivetrain = drivetrain;
     m_xaxisSpeedSupplier = xaxisSpeedSupplier;
     m_zaxisRotateSupplier = zaxisRotateSuppplier;
-    addRequirements(m_drivetrain);
+    addRequirements(drivetrain);
   }
 
   // Called when the command is initially scheduled.

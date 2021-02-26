@@ -18,12 +18,13 @@ public class DriveTime extends CommandBase {
    *
    * @param speed The speed which the robot will drive. Negative is in reverse.
    * @param time How much time to drive in seconds
+   * @param drive The drivetrain subsystem on which this command will run
    */
-  public DriveTime(double speed, double time) {
+  public DriveTime(double speed, double time, Drivetrain drive) {
     m_speed = speed;
     m_duration = time * 1000;
-    m_drive = Drivetrain.getInstance();
-    addRequirements(m_drive);
+    m_drive = drive;
+    addRequirements(drive);
   }
 
   // Called when the command is initially scheduled.

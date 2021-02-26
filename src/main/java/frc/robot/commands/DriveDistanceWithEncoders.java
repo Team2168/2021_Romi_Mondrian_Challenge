@@ -7,13 +7,10 @@ package frc.robot.commands;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class DriveDistance extends CommandBase {
+public class DriveDistanceWithEncoders extends CommandBase {
   private final Drivetrain m_drive;
   private final double m_distance;
   private final double m_speed;
-
-  private static final double kP = -0.075;
-  private static final double MAXSPEED = 0.65;
 
   /**
    * Creates a new DriveDistance. This command will drive your your robot for a desired distance at
@@ -23,7 +20,7 @@ public class DriveDistance extends CommandBase {
    * @param inches The number of inches the robot will drive
    * @param drive The drivetrain subsystem on which this command will run
    */
-  public DriveDistance(double speed, double inches, Drivetrain drive) {
+  public DriveDistanceWithEncoders(double speed, double inches, Drivetrain drive) {
     m_distance = inches;
     m_speed = speed;
     m_drive = drive;
@@ -35,19 +32,23 @@ public class DriveDistance extends CommandBase {
   public void initialize() {
     m_drive.arcadeDrive(0, 0);
     m_drive.resetEncoders();
-    m_drive.resetGyro();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double rotationSpeed = m_drive.getGyroAngleZ() * kP;
-    if (rotationSpeed > MAXSPEED) {
-      rotationSpeed = MAXSPEED;
-    } else if (rotationSpeed < -MAXSPEED) {
-      rotationSpeed = -MAXSPEED;
+    double leftWheelSpeed, rightWheelSpeed;
+    if (m_drive.getLeftDistanceInch() <= m_distance) {
+      leftWheelSpeed = m_speed;
+    } else {
+      leftWheelSpeed = 0;
     }
-    m_drive.arcadeDrive(m_speed, rotationSpeed);
+    if (m_drive.getRightDistanceInch() <= m_distance) {
+      rightWheelSpeed = m_speed;
+    } else {
+      rightWheelSpeed = 0;
+    }
+    m_drive.tankDrive(leftWheelSpeed, rightWheelSpeed);
   }
 
   // Called once the command ends or is interrupted.
