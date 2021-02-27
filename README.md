@@ -1,9 +1,13 @@
 # 2021_Romi_Mondrian_Challenge
-repo to store our Mondrian Challenge code
+Repo to store our code for the [Mondrian Challenge](https://wpilib.org/blog/first-romi-robot-and-the-hour-of-code-broadcast).
+
+Submission videos:
+* Teleop: https://youtu.be/UzgeWua7LIU
+* Auto: https://youtu.be/T5uM75jgTr0
 
 # Documentation
 
-  * [Mondrian MAdness Challenge Rules](https://wpilib.org/blog/mondrian-madness-mini-bot-challenge)
+  * [Mondrian MAdness Challenge Rules](https://wpilib.org/blog/mondrian-madness-mini-bot-challenge), [update 1](https://static1.squarespace.com/static/5d4b06a67cd3580001ded283/t/6025c97080f5db784fa6d056/1613089136516/BAE+Systems+Challenge+%231+Mondrian+Madness+Update+1.pdf)
   * [Full romi hardware user manual](https://www.pololu.com/docs/0J69/all)
   * WPILib [getting started with Romi documumentation](https://docs.wpilib.org/en/latest/docs/romi-robot/index.html)
 
