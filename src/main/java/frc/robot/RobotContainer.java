@@ -13,6 +13,7 @@ import frc.robot.commands.AutonomousTime;
 import frc.robot.commands.DriveDistance;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.MondrianHardCoded;
+import frc.robot.commands.MondrianRefined;
 import frc.robot.commands.TurnDegreesGyro;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OnBoardIO;
@@ -75,9 +76,9 @@ public class RobotContainer {
     JoystickButton testCounterClockwiseRotation = new JoystickButton(m_controller, 4);
 
   testDistance.whenPressed(new DriveDistance(0.6, 10, m_drivetrain));
-  ButtonX.whenPressed(new MondrianHardCoded(m_drivetrain));
-  testClockwiseRotation.whenPressed(new TurnDegreesGyro(0.5, 90, m_drivetrain));
-  testCounterClockwiseRotation.whenPressed(new TurnDegreesGyro(0.5, -90, m_drivetrain));
+  ButtonX.whenPressed(new MondrianRefined(m_drivetrain));
+  testClockwiseRotation.whenPressed(new TurnDegreesGyro(0.5, 120, m_drivetrain));
+  testCounterClockwiseRotation.whenPressed(new TurnDegreesGyro(0.5, -120, m_drivetrain));
 
     // Example of how to use the onboard IO
     Button onboardButtonA = new Button(m_onboardIO::getButtonAPressed);

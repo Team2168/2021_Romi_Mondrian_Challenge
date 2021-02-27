@@ -12,7 +12,7 @@ public class TurnDegreesGyro extends CommandBase {
   private final double m_degrees;
   private final double m_speed;
   private static final double MAXSPEED = 0.35;
-  private static final double MINSPEED = 0.16;
+  private static final double MINSPEED = 0.175;
   private static final double kP = 0.008;
 
   /**

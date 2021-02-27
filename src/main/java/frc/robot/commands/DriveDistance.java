@@ -13,7 +13,7 @@ public class DriveDistance extends CommandBase {
   private final double m_speed;
 
   private static final double kP = -0.075;
-  private static final double MAXSPEED = 0.65;
+  private static final double MAXSPEED = 0.8;
 
   /**
    * Creates a new DriveDistance. This command will drive your your robot for a desired distance at

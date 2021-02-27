@@ -32,7 +32,7 @@ public class MondrianHardCoded extends SequentialCommandGroup {
       new Sleep().withTimeout(0.3),
       new TurnDegreesGyro(0.5, -45, simpleDrive).withTimeout(1.5),
       new Sleep().withTimeout(0.3),
-      new DriveDistance(0.4, 14, simpleDrive),
+      new DriveDistance(0.4, 12, simpleDrive),
       new Sleep().withTimeout(0.3),
       new TurnDegreesGyro(0.5, 45, simpleDrive).withTimeout(1.5),
       new Sleep().withTimeout(0.3),
@@ -44,10 +44,10 @@ public class MondrianHardCoded extends SequentialCommandGroup {
       new Sleep().withTimeout(0.3),
       new TurnDegreesGyro(0.5, 45, simpleDrive).withTimeout(1.5),
       new Sleep().withTimeout(0.3),
-      new DriveDistance(0.4, 6, simpleDrive),
+      new DriveDistance(0.4, 7, simpleDrive),
       new Sleep().withTimeout(0.3),
       new TurnDegreesGyro(0.5, 45, simpleDrive).withTimeout(1.5),
       new Sleep().withTimeout(0.3),
-      new DriveDistance(0.4, 9, simpleDrive));
+      new DriveDistance(0.4, 12, simpleDrive));
   }
 }
